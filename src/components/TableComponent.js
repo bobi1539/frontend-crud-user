@@ -1,10 +1,16 @@
 import React from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Row, Col } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfo, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faInfo,
+  faEdit,
+  faTrash,
+  faUserPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
+import { Link } from "react-router-dom";
 
 const { SearchBar } = Search;
 
@@ -34,15 +40,19 @@ const columns = [
     text: "Aksi",
     headerAlign: "center",
     align: "center",
-    formatter: () => {
+    formatter: (rowContent, row) => {
       return (
         <div>
-          <Button variant="dark" className="me-2">
-            <FontAwesomeIcon icon={faInfo} /> Detail
-          </Button>
-          <Button variant="dark" className="me-2">
-            <FontAwesomeIcon icon={faEdit} /> Edit
-          </Button>
+          <Link to={"/detail/" + row.id}>
+            <Button variant="dark" className="me-2">
+              <FontAwesomeIcon icon={faInfo} /> Detail
+            </Button>
+          </Link>
+          <Link to={"/edit/" + row.id}>
+            <Button variant="dark" className="me-2">
+              <FontAwesomeIcon icon={faEdit} /> Edit
+            </Button>
+          </Link>
           <Button variant="dark" className="me-2">
             <FontAwesomeIcon icon={faTrash} /> Hapus
           </Button>
@@ -74,13 +84,24 @@ const TableComponent = (props) => {
         >
           {(props) => (
             <div>
-              <div className="float-end">
-                <SearchBar
-                  className="mb-3"
-                  placeholder="Search ..."
-                  {...props.searchProps}
-                />
-              </div>
+              <Row>
+                <Col>
+                  <Link to="/create">
+                    <Button variant="dark">
+                      <FontAwesomeIcon icon={faUserPlus} /> Create User
+                    </Button>
+                  </Link>
+                </Col>
+                <Col>
+                  <div className="float-end">
+                    <SearchBar
+                      className="mb-3"
+                      placeholder="Search ..."
+                      {...props.searchProps}
+                    />
+                  </div>
+                </Col>
+              </Row>
 
               <BootstrapTable
                 {...props.baseProps}
