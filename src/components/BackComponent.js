@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const BackComponent = () => {
   return (
-    <Link to="/">
+    <Link to="/users">
       <Button variant="dark">
         <FontAwesomeIcon icon={faArrowLeft} /> Back
       </Button>

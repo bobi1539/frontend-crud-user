@@ -1,36 +1,30 @@
 import React, { Component } from "react";
-import JumbotronComponent from "./components/JumbotronComponent";
 import NavbarComponent from "./components/NavbarComponent";
 import { BrowserRouter, Route } from "react-router-dom";
 import HomeContainer from "./containers/HomeContainer";
 import CreateUserContainer from "./containers/CreateUserContainer";
 import DetailUserComponent from "./containers/DetailUserComponent";
 import EditUserComponent from "./containers/EditUserComponent";
+import UserContainer from "./containers/UserContainer";
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      title: "Zero Programmer",
-      user:[]
-    };
-  }
-
   render() {
     return (
       <div>
         <NavbarComponent />
-        <JumbotronComponent title={this.state.title} />
+
         <BrowserRouter>
           <Route path="/" exact>
             <HomeContainer />
           </Route>
-          <Route path="/create" exact>
+          <Route path="/users" exact>
+            <UserContainer />
+          </Route>
+          <Route path="/users/create" exact>
             <CreateUserContainer />
           </Route>
-          <Route path="/detail/:id" exact component={DetailUserComponent}/>
-          <Route path="/edit/:id" exact>
+          <Route path="/users/detail/:id" exact component={DetailUserComponent} />
+          <Route path="/users/edit/:id" exact>
             <EditUserComponent />
           </Route>
         </BrowserRouter>
