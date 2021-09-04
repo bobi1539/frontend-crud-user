@@ -8,9 +8,14 @@ import DetailUserComponent from "./containers/DetailUserComponent";
 import EditUserComponent from "./containers/EditUserComponent";
 
 export default class App extends Component {
-  state = {
-    title: "Zero Programmer",
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      title: "Zero Programmer",
+      user:[]
+    };
+  }
 
   render() {
     return (
@@ -24,9 +29,7 @@ export default class App extends Component {
           <Route path="/create" exact>
             <CreateUserContainer />
           </Route>
-          <Route path="/detail/:id" exact>
-            <DetailUserComponent />
-          </Route>
+          <Route path="/detail/:id" exact component={DetailUserComponent}/>
           <Route path="/edit/:id" exact>
             <EditUserComponent />
           </Route>
